@@ -38,7 +38,13 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!$request->input('periodo') || !$request->input('sueldo')){
+            return response()->json(['mensaje'=> 'Faltan datos para poder dar de alta el periodo', 'codigo' => 422],422);
+        }
+        
+        Periodo::create($request->all());
+        return response()->json(['mensaje'=>'Periodo insertado'],201);
+        
     }
 
     /**
@@ -72,7 +78,22 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $periodo = Periodo::find($id);
+        
+        IF (!$periodo){
+                return response()->json(['mensaje'=> 'No existe el periodo', 'codigo' => 404],404);
+        }
+        
+        $sueldo = $request->input('sueldo');
+            
+        if ($sueldo > 0 ){
+            $periodo->sueldo = $sueldo;
+            $periodo->save();
+                 return response()->json(['mensaje'=> 'Cambio Realizado', 'codigo' => 200],200);
+        } else {
+                 return response()->json(['mensaje'=> 'Cambio No Realizado', 'codigo' => 422],422);
+            
+        }
     }
 
     /**
@@ -83,6 +104,14 @@ class PeriodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $periodo = Periodo::find($id);
+        
+        IF (!$periodo){
+                return response()->json(['mensaje'=> 'No existe el periodo', 'codigo' => 404],404);
+        }
+        
+        $periodo->delete();
+        
+        return response()->json(['mensaje'=> 'Periodo eliminado', 'codigo' => 200],200);
     }
 }
