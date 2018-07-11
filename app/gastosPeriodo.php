@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class gastosPeriodo extends Model
+class GastosPeriodo extends Model
 {
-    protected $table = 'gasto_periodo';
+    protected $table = 'gastos_periodo';
     
     protected $primaryKey = 'id';
               
-    protected $fillable = array('periodo','gasto','sueldo');
+    protected $fillable = array('periodo_id','gasto_id','pagar');
     
     protected $hidden = ['created_at','updated_at'];
 }

@@ -14,8 +14,10 @@ class CreateGastosPeriodoTable extends Migration
     {
         Schema::create('gastos_periodo', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('periodo')->references('id')->on('periodo');
-            $table->foreign('gasto')->references('id')->on('gasto');
+            $table->integer('periodo_id')->unsigned();
+            $table->foreign('periodo_id')->references('id')->on('periodo');
+            $table->integer('gasto_id')->unsigned();
+            $table->foreign('gasto_id')->references('id')->on('gasto');
             $table->decimal('pagar',8,2);
             $table->timestamps();
         });

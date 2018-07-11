@@ -13,7 +13,7 @@ class GastosSeeder extends Seeder
      */
     public function run()
     {
-        Gasto::truncate();
+       // Gasto::truncate();
         
         Gasto::create
         ([
