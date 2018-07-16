@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Http\Requests;
 use App\gastosPeriodo;
@@ -18,8 +20,15 @@ class GastoPeriodoController extends Controller
      */
     public function index()
     {
-          $gastoPeriodo = GastosPeriodo::all();
-          return response()->json(['datos'=>$gastoPeriodo],200);
+          //$gastoPeriodo = GastosPeriodo::all();
+           
+          $gastos = DB::table('gastos_periodo')
+            ->join('periodo', 'periodo_id', '=', 'periodo.id')
+            ->join('gasto', 'gasto_id', '=', 'gasto.id')
+            ->select('periodo.periodo', 'gasto.codigo', 'gasto.descripcion','gastos_periodo.pagar' )
+            ->get();
+            
+          return response()->json(['datos'=>$gastos],200);
     }
 
     /**
@@ -104,4 +113,11 @@ class GastoPeriodoController extends Controller
     {
         //
     }
+    
+    public function totalGasto($perio)
+    {
+          //$total = DB::table('users')->where('name', 'John')->)count();
+        return $perio;
+    }
+    
 }

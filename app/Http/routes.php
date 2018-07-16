@@ -18,6 +18,7 @@ Route::get('/test', function(){
 
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
+Route::get('gastos/periodo/{perio}/total', 'GastoPeriodoController@totalGasto');
 
 Route::resource('gastos','GastoController');
 Route::resource('periodos','PeriodoController');
