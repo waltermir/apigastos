@@ -20,8 +20,7 @@ class GastoPeriodoController extends Controller
      */
     public function index()
     {
-          //$gastoPeriodo = GastosPeriodo::all();
-           
+        
           $gastos = DB::table('gastos_periodo')
             ->join('periodo', 'periodo_id', '=', 'periodo.id')
             ->join('gasto', 'gasto_id', '=', 'gasto.id')
@@ -75,9 +74,17 @@ class GastoPeriodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($periodo)
     {
-        //
+            $gastos = DB::table('gastos_periodo')
+            ->join('periodo', 'periodo_id', '=', 'periodo.id')
+            ->join('gasto', 'gasto_id', '=', 'gasto.id')
+            ->where('periodo.periodo', '=',$periodo)
+            ->select('periodo.periodo', 'gasto.codigo', 'gasto.descripcion','gastos_periodo.pagar' )
+            ->get();
+            
+          return response()->json(['datos'=>$gastos],200);
+          
     }
 
     /**
@@ -117,7 +124,17 @@ class GastoPeriodoController extends Controller
     public function totalGasto($perio)
     {
           //$total = DB::table('users')->where('name', 'John')->)count();
-        return $perio;
+          
+          
+            $gastos = DB::table('gastos_periodo')
+            ->join('periodo', 'periodo_id', '=', 'periodo.id')
+            ->where('periodo',$perio)
+            ->select('sueldo')->sum('gastos_periodo.pagar');
+            
+          return response()->json(['gasto_periodo'=>$gastos],200);
+          
+  
+
     }
     
 }
