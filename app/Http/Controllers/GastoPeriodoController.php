@@ -18,6 +18,12 @@ class GastoPeriodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct (){
+        
+        $this->middleware('oauth',['only'=>['store','update','destroy']]);
+        
+    }
+    
     public function index()
     {
         

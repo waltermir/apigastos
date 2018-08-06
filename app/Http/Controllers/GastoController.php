@@ -9,6 +9,14 @@ use App\gasto;
 
 class GastoController extends Controller
 {
+    
+    public function __construct (){
+        
+        $this->middleware('auth.basic.once',['only'=>['store','update','destroy']]);
+        
+    }
+    
+    
     public function index (){
      $gastos = Gasto::all();
     return response()->json(['datos'=>$gastos],200);
