@@ -9,6 +9,14 @@ use App\periodo;
 
 class PeriodoController extends Controller
 {
+    
+    public function __construct ()
+    {
+    
+    $this->middleware('oauth',['only'=>['store','update','destroy']]);
+    
+    }
+    
     /**
      * Display a listing of the resource.
      *

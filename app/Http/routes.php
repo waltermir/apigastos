@@ -24,9 +24,9 @@ Route::get('gastos/periodo/{perio}', 'GastoPeriodoController@show');
 Route::resource('gastos','GastoController');
 Route::resource('periodos','PeriodoController');
 Route::resource('gastosperiodos','GastoPeriodoController');
-Route::post('oauth/access_token', function({
-            return Response::json(Authorizer::issueAccessToken();)
-}));
+Route::post('oauth/access_token', function(){
+            return Response::json(Authorizer::issueAccessToken());
+});
 
 
 

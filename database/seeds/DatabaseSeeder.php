@@ -12,8 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+         DB::table('gastos_periodo')->truncate();
+         DB::table('gasto')->truncate();
          $this->call('GastosSeeder');
+         DB::table('periodo')->truncate();
          $this->call('PeriodoSeeder');
+         DB::table('oauth_clients')->truncate();
+         $this->call('Oaut2Seeder');
+         
     }
 }
 ?>
