@@ -1,8 +1,7 @@
 <?php
-use App\periodo;
 use Illuminate\Database\Seeder;
 
-class PeriodoSeeder extends Seeder
+class Oaut2Seeder extends Seeder
 {
     /**
      * Run the database seeds.
